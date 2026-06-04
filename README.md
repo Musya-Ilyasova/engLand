@@ -38,6 +38,7 @@ npm run build
 
 
 ## Project Structure
+```text
 src/
 ├── components/
 │   ├── Hero.tsx
@@ -51,6 +52,7 @@ src/
 ├── main.tsx
 ├── index.css
 └── vite-env.d.ts
+```
 
 ## Features
 Responsive layout
