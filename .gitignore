@@ -4,3 +4,14 @@ dist
 .env
 .env.local
 .DS_Store
+
+# Claude Code / LLM working files
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+AGENTS.md
+.mcp.json
+.aider*
+.cursor/
+.cursorrules
+.github/copilot-instructions.md
