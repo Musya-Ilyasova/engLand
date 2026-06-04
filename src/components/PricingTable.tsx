@@ -1,60 +1,57 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, X, Loader2, CalendarDays, BookOpen, GraduationCap, Clock } from 'lucide-react';
-
-const PROJECT_ID = 'aca44d9e-a73f-4c91-8964-7d287e895910';
+import { CheckCircle2, X, Loader2, CalendarDays, BookOpen, Clock } from 'lucide-react';
+import { submitLead } from '../lib/submitLead';
 
 interface Plan {
   id: string;
   name: string;
   lessons: number;
   price: string;
-  description: string;
+  pricePerLesson: string;
   isPopular?: boolean;
   features: string[];
 }
 
 const plans: Plan[] = [
   {
-    id: 'plan-4',
-    name: 'Старт',
+    id: 'plan-standart',
+    name: 'Стандарт',
     lessons: 4,
-    price: '8 000 ₽',
-    description: 'Идеально для поддержания уровня или плавного старта.',
+    price: '5 600 ₽',
+    pricePerLesson: '1 400 ₽',
     features: [
-      '4 индивидуальных урока (60 мин)',
-      'Адаптация материалов под ваши цели',
-      'Проверка домашних заданий',
-      'Разбор базовой грамматики',
+      'Адаптация под цели',
+      'Проверка ДЗ',
+      'Заучивание фраз и структур',
+      'Разбор базовых грамматических паттернов',
     ],
   },
   {
-    id: 'plan-8',
-    name: 'Оптимум',
+    id: 'plan-intensiv',
+    name: 'Интенсив',
     lessons: 8,
-    price: '15 000 ₽',
-    description: 'Рекомендуемый темп для заметного прогресса (2 раза в неделю).',
+    price: '10 000 ₽',
+    pricePerLesson: '1 250 ₽',
     isPopular: true,
     features: [
-      '8 индивидуальных уроков (60 мин)',
-      'Работа по учебникам Cambridge/Oxford',
-      'Углубленный разбор грамматики',
-      'Заучивание ключевых структур',
-      'Постоянная обратная связь',
+      'Работа по Cambridge/Oxford',
+      'Глубокий разбор времён, модальных глаголов',
+      'Осознанное заучивание текстов',
+      'Еженедельные ДЗ + обратная связь',
     ],
   },
   {
-    id: 'plan-12',
-    name: 'Интенсив',
+    id: 'plan-maximum',
+    name: 'Максимум',
     lessons: 12,
-    price: '21 000 ₽',
-    description: 'Для тех, кому нужен быстрый результат и глубокое погружение.',
+    price: '13 800 ₽',
+    pricePerLesson: '1 150 ₽',
     features: [
-      '12 индивидуальных уроков (60 мин)',
-      'Интенсивная проработка всех навыков',
-      'Сложные грамматические темы',
-      'Преодоление языкового барьера',
-      'Приоритет в выборе расписания',
+      'Комплекс: говорение, понимание, грамматика, лексика',
+      'Сложные темы: пассив, инверсия, идиомы',
+      'Подготовка к собеседованию/презентации',
+      'Приоритет в расписании + бонус',
     ],
   },
 ];
@@ -100,29 +97,14 @@ export default function PricingTable() {
     setError('');
 
     try {
-      const payload = {
-        ...formData,
-        selectedPlan: selectedPlan?.name,
-        lessonsCount: selectedPlan?.lessons,
-      };
-
-      const response = await fetch(
-        `#`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            formIdentifier: 'pricing-enrollment-form',
-            payload,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Ошибка при отправке заявки');
-      }
+      await submitLead({
+        formIdentifier: 'pricing-enrollment-form',
+        payload: {
+          ...formData,
+          selectedPlan: selectedPlan?.name,
+          lessonsCount: selectedPlan?.lessons,
+        },
+      });
 
       setIsSuccess(true);
     } catch (err) {
@@ -151,8 +133,8 @@ export default function PricingTable() {
             Прозрачные условия обучения
           </h2>
           <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-            Системный подход требует регулярности. Выберите комфортный для вас темп занятий.
-            Никаких скрытых платежей, только честная работа на результат.
+            Срок действия абонемента — 35 дней с момента первого занятия.
+            Это гарантирует регулярность и прогресс без перегрузки.
           </p>
         </motion.div>
 
@@ -197,16 +179,16 @@ export default function PricingTable() {
 
             <div className="mb-6">
               <h3 className="text-2xl font-bold text-slate-900">{plan.name}</h3>
-              <p className="text-slate-500 mt-2 min-h-12 text-sm">{plan.description}</p>
             </div>
 
-            <div className="mb-6 flex items-baseline text-slate-900">
+            <div className="mb-6 flex items-baseline gap-2 text-slate-900">
               <span className="text-4xl font-extrabold tracking-tight">{plan.price}</span>
+              <span className="text-sm text-slate-500">{plan.pricePerLesson} / урок</span>
             </div>
 
             <div className="flex items-center gap-2 mb-8 bg-slate-50 p-3 rounded-xl border border-slate-100">
               <BookOpen className="w-5 h-5 text-slate-400" />
-              <span className="font-medium text-slate-700">{plan.lessons} уроков</span>
+              <span className="font-medium text-slate-700">{plan.lessons} уроков · 45 мин</span>
             </div>
 
             <ul className="space-y-4 mb-8 flex-1">
@@ -228,6 +210,9 @@ export default function PricingTable() {
             >
               Выбрать абонемент
             </button>
+            <p className="text-xs text-slate-500 text-center mt-3">
+              Оплата картой или переводом. Без скрытых комиссий.
+            </p>
           </motion.div>
         ))}
       </div>

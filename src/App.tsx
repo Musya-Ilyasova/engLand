@@ -4,6 +4,7 @@ import BentoGridFeatures from './components/BentoGridFeatures';
 import ContentBlock from './components/ContentBlock';
 import PricingTable from './components/PricingTable';
 import ContactForm from './components/ContactForm';
+import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
       <ContentBlock />
       <PricingTable />
       <ContactForm />
+      <FAQ />
       <Footer />
 
     </div>

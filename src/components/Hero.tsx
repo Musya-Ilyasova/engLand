@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, GraduationCap, Clock, CheckCircle2, Loader2, ArrowRight, ShieldCheck } from 'lucide-react';
-
-const PROJECT_ID = 'aca44d9e-a73f-4c91-8964-7d287e895910';
+import { BookOpen, Clock, CheckCircle2, Loader2, ArrowRight } from 'lucide-react';
+import { submitLead } from '../lib/submitLead';
 
 export default function Hero() {
   const [formData, setFormData] = useState({
@@ -25,20 +24,10 @@ export default function Hero() {
     setError('');
 
     try {
-      const response = await fetch(`#`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          formIdentifier: 'hero-trial-lesson',
-          payload: formData
-        })
+      await submitLead({
+        formIdentifier: 'hero-trial-lesson',
+        payload: formData,
       });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
 
       setIsSuccess(true);
     } catch (err) {
@@ -83,18 +72,6 @@ export default function Hero() {
         animate="visible"
       >
 
-        {/* Badges */}
-        <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-3 mb-8">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-slate-300 backdrop-blur-sm">
-            <GraduationCap className="w-4 h-4 text-blue-400" />
-            Для взрослых 18+
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-slate-300 backdrop-blur-sm">
-            <ShieldCheck className="w-4 h-4 text-blue-400" />
-            Опыт 20+ лет
-          </span>
-        </motion.div>
-
         {/* Main Headline */}
         <motion.div variants={itemVariants} className="max-w-4xl">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
@@ -104,8 +81,7 @@ export default function Hero() {
             </span>
           </h1>
           <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Системный подход без пустых обещаний. Грамматика — это не враг, а инструмент.
-            Поймите логику языка, чтобы перестать «просто выкручиваться» и начать звучать профессионально.
+            Системный подход без навязчивых обещаний — только проверенные методы и реальный прогресс.
           </p>
         </motion.div>
 

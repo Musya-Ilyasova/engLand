@@ -3,8 +3,6 @@ import { motion } from 'framer-motion';
 import { BookOpen, Send, Mail, GraduationCap } from 'lucide-react';
 
 const Footer: React.FC = () => {
-  const currentYear = new Date().getFullYear();
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -47,12 +45,16 @@ const Footer: React.FC = () => {
             Английский для взрослых
           </h3>
           <p className="text-slate-500 leading-relaxed">
-            Системный подход к изучению языка. Понимание структуры, грамотная речь и уверенность без пустых обещаний.
+            Системный подход. Понимание структуры. Грамотная речь — без пустых обещаний.
+          </p>
+          <p className="text-slate-500 leading-relaxed mt-4">
+            Дмитрий — преподаватель с 20+ годами опыта. Работаю только со взрослыми от 18 лет.
           </p>
         </motion.div>
 
         {/* Contacts */}
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-6 sm:gap-12">
+          {/* TODO: заменить href на реальную ссылку Telegram Дмитрия (https://t.me/username) */}
           <a
             href="#"
             className="flex items-center gap-2 hover:text-slate-200 transition-colors duration-300 group"
@@ -60,16 +62,16 @@ const Footer: React.FC = () => {
             <div className="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center group-hover:border-slate-600 transition-colors">
               <Send className="w-4 h-4 text-slate-400 group-hover:text-slate-200" />
             </div>
-            <span>@english_system</span>
+            <span>Telegram</span>
           </a>
           <a
-            href="mailto:hello@example.com"
+            href="mailto:crystal-english@yandex.ru"
             className="flex items-center gap-2 hover:text-slate-200 transition-colors duration-300 group"
           >
             <div className="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center group-hover:border-slate-600 transition-colors">
               <Mail className="w-4 h-4 text-slate-400 group-hover:text-slate-200" />
             </div>
-            <span>contact@english-system.ru</span>
+            <span>crystal-english@yandex.ru</span>
           </a>
         </motion.div>
 
@@ -80,7 +82,7 @@ const Footer: React.FC = () => {
         <motion.div variants={itemVariants} className="flex flex-col items-center gap-2 text-slate-600">
           <div className="flex items-center gap-2">
             <BookOpen className="w-4 h-4" />
-            <p>© {currentYear} Частный преподаватель английского языка.</p>
+            <p>© 2026 Дмитрий — частный преподаватель английского языка.</p>
           </div>
           <p>Все права защищены.</p>
         </motion.div>

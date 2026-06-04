@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, CheckCircle, Loader2, User, Phone, Clock, BookOpen, Target, MessageSquare } from 'lucide-react';
+import { submitLead } from '../lib/submitLead';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -19,25 +20,11 @@ export default function ContactForm() {
     setStatus('loading');
 
     try {
-      const response = await fetch(
-        '#',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            formIdentifier: 'trial-lesson-form',
-            payload: formData,
-          }),
-        }
-      );
-
-      if (response.ok) {
-        setStatus('success');
-      } else {
-        setStatus('error');
-      }
+      await submitLead({
+        formIdentifier: 'trial-lesson-form',
+        payload: formData,
+      });
+      setStatus('success');
     } catch (error) {
       setStatus('error');
     }
@@ -82,7 +69,7 @@ export default function ContactForm() {
             Запишитесь на бесплатный пробный урок
           </motion.h2>
           <motion.p variants={itemVariants} className="text-blue-200 text-lg leading-relaxed">
-            Сделаем первый шаг к уверенному английскому. Без обязательств.
+            Сделаем первый шаг к уверенному английскому — без обязательств и «разогрева».
           </motion.p>
         </div>
 
@@ -100,7 +87,7 @@ export default function ContactForm() {
                   <MessageSquare className="w-5 h-5 text-blue-300" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-white">Знакомство</h4>
+                  <h4 className="font-medium text-white">Знакомство и обсуждение целей</h4>
                   <p className="text-sm text-blue-200/80 mt-1">Обсудим ваши цели, прошлый опыт и выявим основные трудности.</p>
                 </div>
               </div>
@@ -110,7 +97,7 @@ export default function ContactForm() {
                   <Target className="w-5 h-5 text-blue-300" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-white">Определение уровня</h4>
+                  <h4 className="font-medium text-white">Диагностика уровня</h4>
                   <p className="text-sm text-blue-200/80 mt-1">Точная оценка без стресса, чтобы подобрать правильный вектор работы.</p>
                 </div>
               </div>
@@ -120,8 +107,8 @@ export default function ContactForm() {
                   <BookOpen className="w-5 h-5 text-blue-300" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-white">Разбор темы</h4>
-                  <p className="text-sm text-blue-200/80 mt-1">Возьмем одну грамматическую конструкцию и разберем ее логику до полного понимания.</p>
+                  <h4 className="font-medium text-white">Разбор одной грамматической структуры с практикой</h4>
+                  <p className="text-sm text-blue-200/80 mt-1">Возьмём одну конструкцию и разберём её логику до полного понимания — сразу с практикой.</p>
                 </div>
               </div>
             </div>
@@ -178,7 +165,7 @@ export default function ContactForm() {
 
                   <motion.div variants={itemVariants} className="space-y-1.5">
                     <label htmlFor="contact" className="text-sm font-medium text-blue-200 ml-1">
-                      Телефон или Telegram
+                      Контакт (Telegram или телефон)
                     </label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
@@ -192,9 +179,10 @@ export default function ContactForm() {
                         value={formData.contact}
                         onChange={handleChange}
                         className="w-full bg-blue-900/50 border border-blue-700/50 text-white placeholder:text-blue-300/40 rounded-lg pl-11 pr-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        placeholder="+7 (999) 000-00-00 или @username"
+                        placeholder="@username или +7 (999) 000-00-00"
                       />
                     </div>
+                    <p className="text-xs text-blue-300/60 ml-1">Укажите Telegram — быстрее</p>
                   </motion.div>
 
                   <motion.div variants={itemVariants} className="space-y-1.5">
@@ -213,7 +201,7 @@ export default function ContactForm() {
                         value={formData.preferredTime}
                         onChange={handleChange}
                         className="w-full bg-blue-900/50 border border-blue-700/50 text-white placeholder:text-blue-300/40 rounded-lg pl-11 pr-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        placeholder="Например: будни после 18:00"
+                        placeholder="Например: «будни вечером», «выходные утром»"
                       />
                     </div>
                   </motion.div>
@@ -243,7 +231,7 @@ export default function ContactForm() {
                       )}
                     </button>
                     <p className="text-xs text-center text-blue-300/60 mt-4">
-                      Нажимая кнопку, вы соглашаетесь с обработкой персональных данных
+                      Нажимая, вы соглашаетесь с обработкой персональных данных. Мы не спамим.
                     </p>
                   </motion.div>
                 </motion.form>
