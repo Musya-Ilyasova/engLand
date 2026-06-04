@@ -55,25 +55,32 @@ src/
 ```
 
 ## Features
+```text
 Responsive layout
 Modern UI built with Tailwind CSS
 Smooth animations powered by Framer Motion
 Lead generation form
 Modular component architecture
 Optimized for further customization and scaling
-Development Notes
+```
+
+## Development Notes
 
 The application follows a component-based architecture.
 
 Main page sections are separated into independent components, making it easy to:
 
+```text
 modify content;
 update visual styles;
 add new landing sections;
 integrate analytics tools;
 connect external APIs and CRM systems;
 implement SEO improvements.
-Future Improvements
+```
+
+## Future Improvements
+```text
 Testimonials section
 Teacher profile section
 Blog/articles module
@@ -82,6 +89,7 @@ SEO optimization
 CRM integration
 Telegram notifications
 Multi-language support
+```
 
 ## Scripts
 npm run dev       # Start development server
