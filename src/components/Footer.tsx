@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Send, Mail, GraduationCap } from 'lucide-react';
+import { Variants } from 'framer-motion';
 
 const Footer: React.FC = () => {
   const containerVariants = {
@@ -14,7 +15,7 @@ const Footer: React.FC = () => {
     },
   };
 
-  const itemVariants = {
+  const itemVariants:Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
@@ -26,7 +27,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-slate-950 text-slate-400 py-16 px-6 text-center text-sm border-t border-slate-800 relative overflow-hidden">
       {/* Subtle background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent opacity-50" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-px bg-linear-to-r from-transparent via-slate-700 to-transparent opacity-50" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-slate-800/20 blur-3xl rounded-full pointer-events-none" />
 
       <motion.div

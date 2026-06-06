@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, CheckCircle, Loader2, User, Phone, Clock, BookOpen, Target, MessageSquare } from 'lucide-react';
 import { submitLead } from '../lib/submitLead';
+import { Variants } from 'framer-motion';
+
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -30,18 +32,21 @@ export default function ContactForm() {
     }
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
+  const containerVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+    },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
-        when: "beforeChildren",
-        staggerChildren: 0.1
-      }
-    }
+        ease: 'easeOut',
+        when: 'beforeChildren',
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
@@ -60,8 +65,8 @@ export default function ContactForm() {
       >
         {/* Decorative background elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] bg-blue-600/20 blur-[120px] rounded-full" />
-          <div className="absolute -bottom-[20%] -left-[10%] w-[50%] h-[50%] bg-indigo-500/20 blur-[120px] rounded-full" />
+          <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] bg-blue-600/20 blur-[120px] rounded-full" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[50%] bg-indigo-500/20 blur-[120px] rounded-full" />
         </div>
 
         <div className="relative z-10 text-center max-w-2xl mx-auto">
@@ -83,7 +88,7 @@ export default function ContactForm() {
               </h3>
 
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-800/50 flex items-center justify-center border border-blue-700/50">
+                <div className="shrink-0 w-10 h-10 rounded-full bg-blue-800/50 flex items-center justify-center border border-blue-700/50">
                   <MessageSquare className="w-5 h-5 text-blue-300" />
                 </div>
                 <div>
@@ -93,7 +98,7 @@ export default function ContactForm() {
               </div>
 
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-800/50 flex items-center justify-center border border-blue-700/50">
+                <div className="shrink-0 w-10 h-10 rounded-full bg-blue-800/50 flex items-center justify-center border border-blue-700/50">
                   <Target className="w-5 h-5 text-blue-300" />
                 </div>
                 <div>
@@ -103,7 +108,7 @@ export default function ContactForm() {
               </div>
 
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-800/50 flex items-center justify-center border border-blue-700/50">
+                <div className="shrink-0 w-10 h-10 rounded-full bg-blue-800/50 flex items-center justify-center border border-blue-700/50">
                   <BookOpen className="w-5 h-5 text-blue-300" />
                 </div>
                 <div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Clock, CheckCircle2, Loader2, ArrowRight } from 'lucide-react';
 import { submitLead } from '../lib/submitLead';
+import { Variants } from 'framer-motion';
 
 export default function Hero() {
   const [formData, setFormData] = useState({
@@ -48,13 +49,13 @@ export default function Hero() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };
 
   return (
-    <section className="bg-slate-900 text-white min-h-[80vh] flex flex-col justify-center items-center text-center px-4 py-20 lg:py-32 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 relative overflow-hidden">
+    <section className="bg-slate-900 text-white min-h-[80vh] flex flex-col justify-center items-center text-center px-4 py-20 lg:py-32 bg-linear-to-br from-slate-900 via-slate-800 to-blue-950 relative overflow-hidden">
 
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
@@ -62,7 +63,7 @@ export default function Hero() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-500/10 blur-[120px]" />
 
         {/* Subtle Grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-size-[4rem_4rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20" />
       </div>
 
       <motion.div
@@ -76,7 +77,7 @@ export default function Hero() {
         <motion.div variants={itemVariants} className="max-w-4xl">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
             Говорите по-английски <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-indigo-300">
               грамотно и уверенно
             </span>
           </h1>
@@ -90,7 +91,7 @@ export default function Hero() {
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
 
             {/* Form Inner Glow */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 to-transparent pointer-events-none" />
 
             {isSuccess ? (
               <motion.div
